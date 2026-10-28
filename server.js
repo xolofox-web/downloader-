@@ -68,7 +68,6 @@ const downloadLimiter = rateLimit({
   standardHeaders: 'draft-7',
   legacyHeaders: false,
   message: { ok: false, error: { code: 'RATE_LIMITED', message: 'Terlalu banyak permintaan unduhan. Tunggu sebentar lalu coba lagi.' } },
-});
 
 app.use('/api/', apiLimiter);
 
@@ -79,7 +78,6 @@ app.use('/api/', apiLimiter);
 const PLATFORMS = [
   { id: 'tiktok', label: 'TikTok', hosts: ['tiktok.com'] },
   { id: 'instagram', label: 'Instagram', hosts: ['instagram.com', 'instagr.am'] },
-  { id: 'youtube', label: 'YouTube', hosts: ['youtube.com', 'youtu.be'] },
   { id: 'spotify', label: 'Spotify', hosts: ['spotify.com', 'spotify.link'] },
   { id: 'facebook', label: 'Facebook', hosts: ['facebook.com', 'fb.watch', 'fb.com'] },
   { id: 'twitter', label: 'X (Twitter)', hosts: ['twitter.com', 'x.com', 't.co'] },
