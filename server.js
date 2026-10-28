@@ -20,7 +20,7 @@ const UPSTREAM_TIMEOUT = Number(process.env.UPSTREAM_TIMEOUT_MS) || 25000;
 const MAX_URL_LENGTH = 2048;
 
 if (!API_KEY) {
-  console.warn('[warn] DOWNLOADER_API_KEY belum di-set. Endpoint /api/download akan menolak permintaan.');
+  console.warn('[warn] DOWNLOADER_API_KEY belum di-set. Endpoint /api/ akan menolak permintaan.');
 }
 
 /* ------------------------------------------------------------------ */
