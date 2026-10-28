@@ -1,6 +1,6 @@
 # Zyxell — All-in-One Media Downloader
 
-Tarik adalah website downloader modern, minimalis, dan responsif yang dibangun dengan arsitektur frontend dan backend terpisah. Website ini memungkinkan pengguna untuk mengunduh konten (video, audio, gambar) dari berbagai platform seperti TikTok, Instagram, YouTube, Spotify, dan lainnya dalam satu tempat.
+Zyxell adalah website downloader modern, minimalis, dan responsif yang dibangun dengan arsitektur frontend dan backend terpisah. Website ini memungkinkan pengguna untuk mengunduh konten (video, audio, gambar) dari berbagai platform seperti TikTok, Instagram, YouTube, Spotify, dan lainnya dalam satu tempat.
 
 ## ✨ Fitur Utama
 - **Auto-Detect Platform**: Mengenali platform secara otomatis dari URL yang ditempel.
