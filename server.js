@@ -84,11 +84,6 @@ const PLATFORMS = [
   { id: 'facebook', label: 'Facebook', hosts: ['facebook.com', 'fb.watch', 'fb.com'] },
   { id: 'twitter', label: 'X (Twitter)', hosts: ['twitter.com', 'x.com', 't.co'] },
   { id: 'pinterest', label: 'Pinterest', hosts: ['pinterest.com', 'pin.it'] },
-  { id: 'soundcloud', label: 'SoundCloud', hosts: ['soundcloud.com', 'snd.sc'] },
-  { id: 'reddit', label: 'Reddit', hosts: ['reddit.com', 'redd.it'] },
-  { id: 'threads', label: 'Threads', hosts: ['threads.net'] },
-  { id: 'vimeo', label: 'Vimeo', hosts: ['vimeo.com'] },
-  { id: 'snapchat', label: 'Snapchat', hosts: ['snapchat.com'] },
 ];
 
 function detectPlatform(rawUrl) {
