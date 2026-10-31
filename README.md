@@ -13,7 +13,6 @@ Zyxell adalah website downloader modern, minimalis, dan responsif yang dibangun 
 ## 🛠️ Teknologi yang Digunakan
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **Backend**: Node.js, Express.js
-- **API**: [APlKayz Downloader](https://apikayz.clutch.web.id/)
 
 ## 🚀 Cara Menjalankan Secara Lokal
 
