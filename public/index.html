@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs - Kayz Rest API</title>
+  <link rel="icon" id="favicon" href="https://raw.githubusercontent.com/ZrooPro/SaveDat1/main/uploads/20261014_072111_304_hc8rjz4r.jpg">
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lucide@0.407.0/dist/umd/lucide.min.js" as="script">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/marked/marked.min.js" as="script">
+  <link rel="preload" href="/api/logo-proxy" as="image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.407.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#050507',
+              dark: '#0c0c12',
+              card: '#12121a',
+              border: '#21212e',
+              orange: '#f97316',
+              amber: '#f59e0b',
+              glow: '#fb923c'
+            },
+            retro: {
+              black: '#050507', 
+              dark: '#0c0c12', 
+              card: '#12121a', 
+              border: '#21212e', 
+              orange: '#f97316', 
+              light: '#f8fafc', 
+              gray: '#94a3b8'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 35px rgba(249, 115, 22, 0.15)',
+            glowHover: '0 0 50px rgba(249, 115, 22, 0.3)',
+            btn: '0 6px 20px rgba(249, 115, 22, 0.2)',
+            bezel: 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.08), 0 16px 40px rgba(0, 0, 0, 0.6)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050507;
+    }
+    .grid-bg {
+      background-image: 
+        radial-gradient(at 50% 0%, rgba(249, 115, 22, 0.12) 0px, transparent 55%),
+        radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.04) 0px, transparent 45%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+    .orange-glow-blur {
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050507;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #21212e;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f97316;
+    }
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .grid-bg {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .orange-glow-blur {
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3a3a3c;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f97316;
+    }
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    /* Markdown Styling in Chat */
+    .md-content h1, .md-content h2, .md-content h3 {
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 0.75rem;
+      margin-bottom: 0.4rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .md-content h1 { font-size: 1.05rem; }
+    .md-content h2 { font-size: 0.95rem; }
+    .md-content h3 { font-size: 0.85rem; }
+    .md-content p {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .md-content strong {
+      font-weight: 800 !important;
+      color: #ffffff !important;
+    }
+    .md-content em {
+      font-style: italic !important;
+      color: #e2e8f0 !important;
+    }
+    .md-content ul {
+      list-style-type: disc;
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .md-content ol {
+      list-style-type: decimal;
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .md-content li {
+      margin-bottom: 0.2rem;
+    }
+    .md-content code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #f97316;
+      background-color: #242426;
+      padding: 0.05rem 0.2rem;
+      border-radius: 4px;
+    }
+    .md-content pre {
+      background-color: #0a0a0c;
+      border: 1px solid #3a3a3c;
+      border-radius: 8px;
+      padding: 0.8rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      position: relative;
+    }
+    .md-content pre code {
+      background-color: transparent;
+      padding: 0;
+      color: #f97316;
+      font-size: 0.68rem;
+      border-radius: 0;
+      display: block;
+      line-height: 1.4;
+    }
+  </style>
+
+  <!-- SEO & Social Previews -->
+  <meta name="description" content="Platform integrasi API inovatif dengan kinerja modular yang andal. Menghubungkan imajinasi digital Anda dengan eksekusi kode backend mutakhir secara instan.">
+  <meta property="og:title" content="Docs - Kayz Rest API">
+  <meta property="og:description" content="Platform integrasi API inovatif dengan kinerja modular yang andal. Menghubungkan imajinasi digital Anda dengan eksekusi kode backend mutakhir secara instan.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ZrooPro/SaveDat1/main/uploads/20261014_072111_304_hc8rjz4r.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docs - Kayz Rest API">
+  <meta name="twitter:description" content="Platform integrasi API inovatif dengan kinerja modular yang andal. Menghubungkan imajinasi digital Anda dengan eksekusi kode backend mutakhir secara instan.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ZrooPro/SaveDat1/main/uploads/20261014_072111_304_hc8rjz4r.jpg">
+  
+  <!-- PERINGATAN: JANGAN TARUH SECRET KEY DI SINI -->
+  <script>
+    window.__SITE_SETTINGS__ = {
+      "webName": "Kayz Rest Api`s",
+      "creatorName": "KayzHz",
+      "logoUrl": "https://raw.githubusercontent.com/ZrooPro/SaveDat1/main/uploads/20261014_072111_304_hc8rjz4r.jpg",
+      "apiTitle": "Docs - Kayz Rest API",
+      "whatsappLink": "https://wa.me/6285177870742",
+      "telegramLink": "https://t.me/kayzhz",
+      "whatsappChannelLink": "https://whatsapp.com/channel/0029Vb7uNJlHFxP5JCJdmG1k",
+      "instagramLink": "https://www.instagram.com/kayzzhz?vrfl=aDF4bDhlcnFmMGVz",
+      "githubLink": "",
+      "emailAddress": "kayzhelper@gmail.com",
+      "paymentGateway": "cashi",
+      "cashiApiKey": "9110eed6b43ca87956c0ee0b75c25477cba9aabe2bdf730f12c1252a982b1b84",
+      "cashiSecretKey": "sk_77a922edd46268deb0d65f9b42415b0f",
+      "pakasirSlug": "depodomain",
+      "pakasirApiKey": "",
+      "pricing": {
+        "vip": { "name": "VIP", "price": 10000, "limit": 12000, "durationDays": 30 },
+        "vvip": { "name": "VVIP", "price": 25000, "limit": 15000, "durationDays": 30 },
+        "enterprise": { "name": "Enterprise", "price": 35000, "limit": 50000, "durationDays": 30 }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#07070a] text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-orange selection:text-black relative">
+
+  <!-- Fixed Hardware-Accelerated Ambient Backdrop (Zero-Glitch) -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#07070a]">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-orange/10 rounded-full blur-[140px] transform-gpu"></div>
+  </div>
+
+  <!-- Premium Page Loader Spinner -->
+  <div id="page-loader" class="fixed inset-0 bg-retro-black z-[9999] flex flex-col items-center justify-center gap-4 transition-all duration-500 ease-out">
+    <div class="relative w-16 h-16 flex items-center justify-center">
+      <div class="absolute inset-0 border-4 border-retro-orange/10 rounded-full animate-pulse"></div>
+      <div class="absolute inset-0 border-4 border-t-retro-orange border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+      <div class="w-2.5 h-2.5 bg-retro-orange rounded-full animate-pulse shadow-glow"></div>
+    </div>
+    <div class="flex flex-col items-center gap-1.5 mt-2">
+      <span class="font-mono text-[10px] tracking-[0.25em] text-white font-bold">Clutch console</span>
+      <span class="font-mono text-[8px] tracking-[0.15em] text-stone-500 animate-pulse">Memuat ruang kerja...</span>
+    </div>
+  </div>
+
+  <!-- Fixed Floating Island Navbar (Always Fixed on Top) -->
+  <div class="fixed top-4 left-0 right-0 z-50 pointer-events-none px-4">
+    <header class="max-w-6xl mx-auto w-full pointer-events-auto">
+      <div class="bg-[#1c1c24]/95 backdrop-blur-xl border border-white/10 rounded-full px-5 py-3 shadow-bezel flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-8 h-8 rounded-full bg-[#121218] border border-white/10 flex items-center justify-center shadow group-hover:border-brand-orange/50 transition-all">
+            <img id="nav-logo-img" src="/api/logo-proxy" class="w-5 h-5 rounded-full object-cover">
+          </div>
+          <span id="nav-brand-title" class="font-display font-bold text-white text-base tracking-tight flex items-center gap-1.5">
+            Kayz Rest Api`s <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+          </span>
+        </a>
+
+        <!-- Action Button -->
+        <div class="flex items-center gap-2.5">
+          <a id="nav-auth-btn" href="/login" class="bg-brand-orange hover:bg-orange-400 text-black font-display font-bold text-xs px-4 py-2 rounded-full shadow-pill transition-all active:scale-95 flex items-center gap-1.5">
+            <i data-lucide="user" class="w-3.5 h-3.5"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Main Content Space -->
+  <main class="max-w-7xl mx-auto px-6 pt-28 pb-12 flex-grow w-full relative z-10 flex flex-col gap-6">
+
+    <!-- Live Workspace Splitter -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- LEFT COLUMN: Params & Setup (7 cols) -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+        
+        <!-- Security API Key Console -->
+        <div class="bg-[#1c1c24] border border-white/10 rounded-3xl p-6 shadow-bezel relative overflow-hidden group">
+          <div class="absolute -top-12 -right-12 w-24 h-24 bg-brand-orange/5 rounded-full blur-xl group-hover:bg-brand-orange/10 transition-all"></div>
+          <div class="flex justify-between items-center mb-3">
+            <label class="font-mono text-[9px] text-slate-300 font-bold flex items-center gap-2 tracking-widest uppercase">
+              <i data-lucide="shield-check" class="w-4 h-4 text-brand-orange"></i>
+              <span>Masukkan Api Key</span>
+            </label>
+            <span id="apikey-status-badge" class="text-[8px] font-mono text-rose-400 bg-rose-400/10 border border-rose-400/20 px-2.5 py-0.5 rounded-md flex items-center gap-1.5 font-bold transition-all">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+              Terkunci
+            </span>
+          </div>
+          
+          <div class="relative flex flex-col gap-2.5">
+            <div class="relative flex items-center">
+              <input type="password" id="sandbox-apikey-input" placeholder="Masukkan Api Key Anda" oninput="handleApiKeyInput()" class="w-full bg-[#121218] border border-white/10 hover:border-brand-orange/30 focus:border-brand-orange rounded-2xl pl-11 pr-12 py-3 font-mono text-xs text-slate-200 focus:outline-none transition-all shadow-inner">
+              <div class="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none text-slate-400">
+                <i data-lucide="key-round" class="w-4 h-4"></i>
+              </div>
+              <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 hover:text-white transition-colors focus:outline-none cursor-pointer">
+                <i data-lucide="eye" id="toggle-key-icon" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Execute Configuration Form -->
+        <div class="bg-[#1c1c24] border border-white/10 rounded-3xl p-6 shadow-bezel">
+          <div class="flex flex-col gap-2 mb-5 pb-4 border-b border-white/[0.06]">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <span id="active-api-category" class="text-[9px] font-mono text-brand-orange bg-brand-orange/10 border border-brand-orange/20 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Kategori</span>
+                <span id="active-api-plan-badge" class="hidden"></span>
+              </div>
+              <span id="selected-api-method" class="text-[9px] font-mono bg-emerald-500/10 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/20">GET</span>
+            </div>
+            <h2 id="active-api-name" class="font-display font-bold text-lg tracking-tight text-white">Nama Api</h2>
+            <p id="active-api-desc" class="text-xs text-slate-400 font-sans leading-relaxed">Deskripsi API akan dirender di sini.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="params-form-inputs">
+            <!-- Dynamic input parameters -->
+          </div>
+          
+          <div class="mt-6 pt-5 border-t border-white/[0.06]">
+            <button id="execute-btn" onclick="executeApiSandbox()" class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-black py-3.5 rounded-2xl font-display font-bold text-sm tracking-wider flex items-center justify-center gap-2.5 shadow-lg hover:shadow-orange-500/20 transition-all duration-300 cursor-pointer active:scale-[0.99]">
+              <i data-lucide="play" class="w-4 h-4 fill-black"></i>
+              <span>Kirim Permintaan</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Code Integration SDK Card -->
+        <div class="bg-[#1c1c24] border border-white/10 rounded-3xl p-6 shadow-bezel relative overflow-hidden">
+          <div class="flex justify-between items-center mb-4 pb-3 border-b border-white/[0.06]">
+            <span class="font-mono text-[9px] font-bold text-white tracking-widest flex items-center gap-2 uppercase">
+              <i data-lucide="code-2" class="w-4 h-4 text-brand-orange"></i>
+              <span>Integrasi Kode (SDK)</span>
+            </span>
+            <span class="text-[8px] font-mono text-slate-400 tracking-widest uppercase">Client Snippets</span>
+          </div>
+
+          <!-- Tab Headers -->
+          <div class="flex gap-2 mb-4 border-b border-white/[0.06] pb-2">
+            <button onclick="switchSdkTab('curl')" id="sdk-tab-curl" class="sdk-tab bg-gradient-to-r from-orange-500 to-amber-500 text-black px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shadow-md">cURL</button>
+            <button onclick="switchSdkTab('node')" id="sdk-tab-node" class="sdk-tab bg-[#14141c] hover:bg-[#1f1f2a] text-slate-200 hover:text-white border border-white/10 hover:border-brand-orange/40 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer">Node.js</button>
+            <button onclick="switchSdkTab('python')" id="sdk-tab-python" class="sdk-tab bg-[#14141c] hover:bg-[#1f1f2a] text-slate-200 hover:text-white border border-white/10 hover:border-brand-orange/40 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer">Python</button>
+            <button onclick="switchSdkTab('php')" id="sdk-tab-php" class="sdk-tab bg-[#14141c] hover:bg-[#1f1f2a] text-slate-200 hover:text-white border border-white/10 hover:border-brand-orange/40 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer">PHP</button>
+          </div>
+
+          <!-- Code Snippet Area -->
+          <div class="relative bg-black/60 rounded-2xl border border-white/[0.06] p-4 overflow-hidden">
+            <pre class="text-[11px] font-mono text-slate-300 leading-relaxed overflow-x-auto select-all max-h-[180px]" id="sdk-code-block"><code></code></pre>
+            <button onclick="copySdkCode(this)" class="absolute top-3 right-3 bg-[#1c1c24] hover:bg-brand-orange/10 border border-white/10 hover:border-brand-orange/30 text-slate-400 hover:text-brand-orange p-2 rounded-xl transition-all cursor-pointer flex items-center justify-center">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Console Output Renderer (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col gap-6 sticky top-24 min-w-0">
+        
+        <!-- Live Request URL card -->
+        <div class="bg-[#1c1c24] border border-white/10 rounded-3xl p-5 shadow-bezel flex flex-col gap-3 min-w-0 overflow-hidden">
+          <div class="flex justify-between items-center text-[8px] font-mono font-bold">
+            <span class="text-slate-400 tracking-widest uppercase">Uri request path</span>
+            <span class="text-emerald-400 flex items-center gap-1 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Siap
+            </span>
+          </div>
+          
+          <div class="flex items-stretch bg-[#121218] border border-white/[0.06] rounded-2xl overflow-hidden p-1 shadow-inner group focus-within:border-brand-orange/40 transition-all w-full min-w-0">
+            <span id="active-request-url" class="font-mono text-xs text-brand-orange px-3 py-2 flex-grow overflow-x-auto whitespace-nowrap select-all scroll-smooth w-full block min-w-0">
+              https://api.clutch.web.id/api/...
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
